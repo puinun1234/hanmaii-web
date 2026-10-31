@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hanmaii — หารค่าใช้จ่ายทริปกับเพื่อน</title>
+<meta name="description" content="Hanmaii แอปหารค่าใช้จ่ายทริปกับเพื่อน สแกนใบเสร็จอัตโนมัติ ตั้งกองกลาง สร้าง QR พร้อมเพย์ รองรับหลายสกุลเงิน และใช้งานออฟไลน์ได้" />
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f7f8fb;
+    --card: #ffffff;
+    --text: #1a1f29;
+    --muted: #5b6270;
+    --line: #e4e7ee;
+    --accent: #3f6fcf;
+    --accent-soft: #eef3ff;
+    --brand-bg: #c7e0fe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans Thai", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.75;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  /* Nav */
+  nav.topbar {
+    border-bottom: 1px solid var(--line);
+    background: rgba(247,248,251,0.9);
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(6px);
+    z-index: 10;
+  }
+  nav.topbar .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: var(--text); }
+  .brand img { width: 30px; height: 30px; border-radius: 8px; display: block; }
+  .nav-links { display: flex; gap: 22px; font-size: 14.5px; color: var(--muted); }
+  .nav-links a { color: var(--muted); }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* Hero */
+  header.hero {
+    padding: 72px 0 56px;
+    text-align: center;
+  }
+  header.hero img.hero-icon {
+    width: 104px;
+    height: 104px;
+    border-radius: 26px;
+    box-shadow: 0 10px 34px rgba(63,111,207,0.25);
+    margin-bottom: 28px;
+  }
+  h1.hero-title {
+    font-size: 38px;
+    font-weight: 800;
+    margin: 0 0 16px;
+    letter-spacing: -0.01em;
+  }
+  p.hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--muted);
+    padding: 12px 22px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .hint { color: var(--muted); font-size: 13px; }
+
+  /* Sections */
+  section { padding: 56px 0; }
+  .section-head { text-align: center; max-width: 560px; margin: 0 auto 40px; }
+  .section-head .eyebrow {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-head h2 { font-size: 27px; font-weight: 800; margin: 0 0 10px; }
+  .section-head p { color: var(--muted); font-size: 15px; margin: 0; }
+
+  /* Feature grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .feature {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px 22px;
+  }
+  .feature .icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+  .feature h3 { font-size: 16px; font-weight: 700; margin: 0 0 8px; }
+  .feature p { font-size: 14px; color: var(--muted); margin: 0; }
+
+  /* How it works */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .step { text-align: center; }
+  .step .num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    font-size: 15px;
+  }
+  .step h3 { font-size: 15.5px; font-weight: 700; margin: 0 0 8px; }
+  .step p { font-size: 14px; color: var(--muted); margin: 0; }
+
+  /* Trust strip */
+  .trust {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px 28px;
+    font-size: 14.5px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .trust strong { color: var(--text); }
+
+  /* Final CTA */
+  .final-cta {
+    text-align: center;
+    background: linear-gradient(135deg, var(--accent-soft), #f7f8fb);
+    border-radius: 24px;
+    padding: 56px 24px;
+  }
+  .final-cta h2 { font-size: 26px; font-weight: 800; margin: 0 0 12px; }
+  .final-cta p { color: var(--muted); margin: 0 0 24px; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0 48px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+  }
+  footer .links { margin-top: 10px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 760px) {
+    .grid, .steps { grid-template-columns: 1fr; }
+    h1.hero-title { font-size: 30px; }
+    header.hero { padding: 52px 0 40px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap">
+    <div class="brand"><img src="assets/icon.png" alt="Hanmaii" />Hanmaii</div>
+    <div class="nav-links">
+      <a href="#features">ฟีเจอร์</a>
+      <a href="#how">วิธีใช้</a>
+      <a href="https://docs.hanmaii.com/">ความเป็นส่วนตัว</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="hero-icon" src="assets/icon.png" alt="Hanmaii" />
+    <h1 class="hero-title">หารค่าใช้จ่ายทริปกับเพื่อน<br>ง่ายกว่าที่เคย</h1>
+    <p class="hero-sub">
+      สแกนใบเสร็จ คำนวณยอดหารอัตโนมัติ และสร้าง QR พร้อมเพย์ให้เพื่อนโอนคืน
+      ไม่ต้องมานั่งคิดเลขหรือจดบันทึกเองอีกต่อไป
+    </p>
+    <div class="cta-row">
+      <span class="badge">🍎 เร็ว ๆ นี้บน App Store</span>
+      <span class="badge">▶️ เร็ว ๆ นี้บน Google Play</span>
+    </div>
+    <p class="hint">ฟรี ไม่มีโฆษณา</p>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">ฟีเจอร์</div>
+      <h2>ทุกอย่างที่ต้องใช้ในทริปเดียว</h2>
+      <p>ออกแบบมาสำหรับทริปกับเพื่อน ทั้งเที่ยวในประเทศและต่างประเทศ</p>
+    </div>
+    <div class="grid">
+
+      <div class="feature">
+        <div class="icon">📸</div>
+        <h3>สแกนใบเสร็จอัตโนมัติ</h3>
+        <p>ถ่ายรูปใบเสร็จ ระบบอ่านรายการและราคาให้ทันที ไม่ต้องพิมพ์เอง</p>
+      </div>
+
+      <div class="feature">
+        <div class="icon">💰</div>
+        <h3>กองกลาง</h3>
+        <p>ตั้งกองกลางของทริป ให้หักจ่ายอัตโนมัติ ส่วนเกินคำนวณหารกันต่อให้เองอัตโนมัติ</p>
+      </div>
+
+      <div class="feature">
+        <div class="icon">🔗</div>
+        <h3>PromptPay QR</h3>
+        <p>สร้าง QR พร้อมเพย์ให้เพื่อนโอนคืนได้ทันที ไม่ต้องขอเลขบัญชีกันไปมา</p>
+      </div>
+
+      <div class="feature">
+        <div class="icon">🌍</div>
+        <h3>หลายสกุลเงิน</h3>
+        <p>บันทึกค่าใช้จ่ายได้หลายสกุลเงินพร้อมกัน พร้อมอัตราแลกเปลี่ยนล่าสุด</p>
+      </div>
+
+      <div class="feature">
+        <div class="icon">📶</div>
+        <h3>ใช้งานออฟไลน์ได้</h3>
+        <p>บันทึกรายการได้แม้ไม่มีสัญญาณอินเทอร์เน็ต ระบบซิงค์ให้อัตโนมัติเมื่อกลับมาออนไลน์</p>
+      </div>
+
+      <div class="feature">
+        <div class="icon">📊</div>
+        <h3>สรุปสถิติทริป</h3>
+        <p>ดูกราฟค่าใช้จ่ายแยกตามหมวดหมู่ เทียบกับงบประมาณที่ตั้งไว้</p>
+      </div>
+
+      <div class="feature">
+        <div class="icon">🔁</div>
+        <h3>รายการประจำ</h3>
+        <p>ตั้งค่าใช้จ่ายที่เกิดซ้ำทุกวัน เช่น ค่าที่พัก ให้บันทึกอัตโนมัติ</p>
+      </div>
+
+      <div class="feature">
+        <div class="icon">🖼️</div>
+        <h3>บันทึกความทรงจำ</h3>
+        <p>แนบรูปภาพเก็บเป็นความทรงจำในแต่ละรายการค่าใช้จ่าย</p>
+      </div>
+
+      <div class="feature">
+        <div class="icon">🔐</div>
+        <h3>ปลอดภัย ไม่แตะเงินจริง</h3>
+        <p>แอปเป็นเครื่องมือคำนวณและสร้าง QR เท่านั้น ไม่เชื่อมบัญชีธนาคาร ไม่มีการโอนเงินผ่านแอป</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">วิธีใช้</div>
+      <h2>เริ่มต้นได้ใน 3 ขั้นตอน</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>สร้างทริปแล้วชวนเพื่อน</h3>
+        <p>ตั้งชื่อทริป เลือกสกุลเงิน แล้วเชิญเพื่อนร่วมทริปเข้ามา</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>บันทึกค่าใช้จ่าย</h3>
+        <p>ถ่ายรูปใบเสร็จหรือกรอกเอง เลือกว่าใครจ่ายและหารกับใครบ้าง</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>เคลียร์ยอดกัน</h3>
+        <p>ดูสรุปว่าใครติดเงินใคร แล้วสแกน QR พร้อมเพย์โอนคืนได้เลย</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="trust">
+      <strong>Hanmaii</strong> ไม่เชื่อมต่อกับบัญชีธนาคารของคุณ และไม่มีการเคลื่อนย้ายเงินจริงผ่านแอป —
+      เป็นเพียงเครื่องมือคำนวณยอดหารและสร้าง QR พร้อมเพย์เท่านั้น การโอนเงินเกิดขึ้นนอกแอปโดยตรงระหว่างผู้ใช้ด้วยกันเอง
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>พร้อมเริ่มหารค่าใช้จ่ายทริปแล้วหรือยัง?</h2>
+      <p>เร็ว ๆ นี้บน App Store และ Google Play</p>
+      <div class="cta-row">
+        <span class="badge">🍎 App Store</span>
+        <span class="badge">▶️ Google Play</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © 2026 Hanmaii · ติดต่อเรา <a href="mailto:support@hanmaii.com">support@hanmaii.com</a>
+    <div class="links">
+      <a href="https://docs.hanmaii.com/">นโยบายความเป็นส่วนตัว</a>
+      <a href="https://docs.hanmaii.com/terms.html">ข้อตกลงการใช้งาน</a>
+      <a href="https://docs.hanmaii.com/delete-account.html">ลบบัญชี</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
