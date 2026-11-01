@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ลบบัญชีและข้อมูล — Hanmaii</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f7f8fb;
+    --card: #ffffff;
+    --text: #1a1f29;
+    --muted: #5b6270;
+    --line: #e4e7ee;
+    --accent: #3f6fcf;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans Thai", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.75;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 20px 96px;
+  }
+  header {
+    margin-bottom: 32px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0 0 8px;
+  }
+  .effective {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .lede {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin: 20px 0 8px;
+    font-size: 15px;
+  }
+  section {
+    margin-top: 36px;
+  }
+  h2 {
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  h2 .num {
+    color: var(--accent);
+    font-weight: 800;
+  }
+  h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    margin: 18px 0 6px;
+  }
+  p { margin: 0 0 12px; font-size: 15px; }
+  ul, ol { margin: 0 0 12px; padding-left: 22px; }
+  li { margin-bottom: 6px; font-size: 15px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .note {
+    border-left: 3px solid var(--accent);
+    background: #eef3ff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #2c4a8f;
+    margin: 12px 0;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .divider {
+    margin: 56px 0 0;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+  .lang-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+  }
+  code {
+    background: #eef0f4;
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-size: 0.92em;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>ลบบัญชีและข้อมูล — Hanmaii</h1>
+    <div class="effective">ปรับปรุงล่าสุด: 30 ตุลาคม 2569 (2026)</div>
+  </header>
+
+  <div class="lede">
+    หน้านี้อธิบายวิธีลบบัญชี Hanmaii ของคุณและข้อมูลส่วนบุคคลที่เกี่ยวข้อง ทั้งแบบที่ทำได้เองในแอป
+    และแบบขอให้เราลบให้โดยไม่ต้องเปิดแอป ดูรายละเอียดเพิ่มเติมเกี่ยวกับการเก็บและใช้ข้อมูลได้ที่
+    <a href="privacy.html">นโยบายความเป็นส่วนตัว</a>
+  </div>
+
+  <section>
+    <h2><span class="num">1.</span> ลบบัญชีด้วยตนเองในแอป (แนะนำ)</h2>
+    <p>วิธีนี้ลบบัญชีได้ทันที ไม่ต้องรอ:</p>
+    <ol>
+      <li>เปิดแอป Hanmaii แล้วเข้าสู่ระบบ</li>
+      <li>ไปที่ <strong>ตั้งค่า</strong></li>
+      <li>เลื่อนลงไปที่ <strong>ลบบัญชี</strong></li>
+      <li>อ่านคำเตือน แล้วกดยืนยัน <strong>ลบบัญชีถาวร</strong></li>
+    </ol>
+    <p class="note">การลบบัญชีถาวรไม่สามารถกู้คืนได้ กรุณาเคลียร์ยอดค้างชำระกับเพื่อนในทริปให้เรียบร้อยก่อน หากเป็นไปได้</p>
+  </section>
+
+  <section>
+    <h2><span class="num">2.</span> ไม่สามารถเข้าแอปได้ / ต้องการให้เราลบข้อมูลให้</h2>
+    <p>
+      หากลบบัญชีในแอปเองไม่ได้ (เช่น ลืมรหัสผ่าน ไม่ได้ติดตั้งแอปแล้ว หรือไม่สะดวกเข้าสู่ระบบ)
+      สามารถส่งคำขอมาที่ <a href="mailto:support@hanmaii.com?subject=ขอลบบัญชี Hanmaii">support@hanmaii.com</a>
+      จากอีเมลที่ใช้สมัครบัญชี พร้อมระบุว่าต้องการลบบัญชีและข้อมูลส่วนบุคคล
+    </p>
+    <p>
+      เราจะตรวจสอบยืนยันตัวตนของผู้ส่งคำขอก่อนดำเนินการ (เพื่อความปลอดภัยของบัญชีคุณ) และจะลบข้อมูลให้ภายใน 30 วัน
+      นับจากวันที่ยืนยันตัวตนสำเร็จ
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">3.</span> ข้อมูลที่จะถูกลบ</h2>
+    <ul>
+      <li>อีเมลและข้อมูลเข้าสู่ระบบ</li>
+      <li>ชื่อที่แสดงและรูปโปรไฟล์</li>
+      <li>หมายเลขพร้อมเพย์</li>
+      <li>รายชื่อเพื่อนและคำเชิญที่ค้างอยู่</li>
+      <li>โทเคนอุปกรณ์สำหรับการแจ้งเตือน (push token)</li>
+      <li>ทริปที่คุณเป็นผู้ใช้งานเพียงคนเดียว (จะถูกลบทั้งหมด รวมรูปและไฟล์แนบ)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">4.</span> ข้อมูลที่จะยังคงอยู่</h2>
+    <p>
+      รายการค่าใช้จ่ายในทริปที่คุณแชร์ร่วมกับสมาชิกคนอื่น จะยังคงอยู่ในทริปนั้นเพื่อไม่ให้ยอดหารของสมาชิกที่เหลือเสียหาย
+      แต่จะไม่ผูกกับชื่อ อีเมล หรือบัญชีของคุณอีกต่อไปหลังลบบัญชีสำเร็จ
+    </p>
+  </section>
+
+  <footer>
+    © 2026 Hanmaii · <a href="privacy.html">นโยบายความเป็นส่วนตัว</a> ·
+    <a href="terms.html">ข้อตกลงการใช้งาน</a>
+  </footer>
+
+  <div class="divider">
+    <span class="lang-tag">English</span>
+    <h1 style="font-size:22px; margin-top:4px;">Delete Your Account and Data — Hanmaii</h1>
+
+    <section style="margin-top:20px;">
+      <h2><span class="num">1.</span> Delete your account in the app (recommended)</h2>
+      <p>This deletes your account immediately:</p>
+      <ol>
+        <li>Open the Hanmaii app and sign in</li>
+        <li>Go to <strong>Settings</strong></li>
+        <li>Scroll down to <strong>Delete account</strong></li>
+        <li>Read the warning and confirm <strong>Delete account permanently</strong></li>
+      </ol>
+      <p class="note">Account deletion is permanent and cannot be undone. Please settle any outstanding balances with trip-mates first if possible.</p>
+    </section>
+
+    <section>
+      <h2><span class="num">2.</span> Can't access the app? Request deletion by email</h2>
+      <p>
+        If you can't delete your account from within the app (lost access, no longer have the app installed, or
+        can't sign in), email <a href="mailto:support@hanmaii.com?subject=Delete my Hanmaii account">support@hanmaii.com</a>
+        from the address you signed up with, stating that you want your account and personal data deleted.
+      </p>
+      <p>We will verify your identity before acting on the request, and complete deletion within 30 days of verification.</p>
+    </section>
+
+    <section>
+      <h2><span class="num">3.</span> Data that gets deleted</h2>
+      <ul>
+        <li>Email and login credentials</li>
+        <li>Display name and profile photo</li>
+        <li>PromptPay number</li>
+        <li>Friends list and pending invites</li>
+        <li>Device push notification tokens</li>
+        <li>Trips you're the sole member of (deleted entirely, including photos and attachments)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="num">4.</span> Data that is retained</h2>
+      <p>
+        Expense entries in trips you shared with other members remain in that trip so the remaining members'
+        balances stay accurate, but are no longer linked to your name, email, or account after deletion.
+      </p>
+    </section>
+  </div>
+
+</div>
+</body>
+</html>
