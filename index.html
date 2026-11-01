@@ -48,9 +48,19 @@
   }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: var(--text); }
   .brand img { width: 30px; height: 30px; border-radius: 8px; display: block; }
-  .nav-links { display: flex; gap: 22px; font-size: 14.5px; color: var(--muted); }
-  .nav-links a { color: var(--muted); }
-  .nav-links a:hover { color: var(--accent); }
+  .nav-links { display: flex; gap: 8px; font-size: 14.5px; }
+  .nav-links a {
+    color: var(--muted);
+    padding: 7px 14px;
+    border-radius: 999px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-links a:hover { color: var(--accent); text-decoration: none; background: var(--accent-soft); }
+  .nav-links a.active {
+    color: #fff;
+    background: var(--accent);
+  }
+  .nav-links a.active:hover { color: #fff; background: var(--accent); }
 
   /* Hero */
   header.hero {
@@ -215,7 +225,7 @@
 <nav class="topbar">
   <div class="wrap">
     <div class="brand"><img src="assets/icon.png" alt="Hanmaii" />Hanmaii</div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#features">ฟีเจอร์</a>
       <a href="#how">วิธีใช้</a>
       <a href="https://docs.hanmaii.com/">ความเป็นส่วนตัว</a>
@@ -390,6 +400,18 @@
     </div>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var links = document.querySelectorAll('#navLinks a');
+    links.forEach(function (link) {
+      link.addEventListener('click', function () {
+        links.forEach(function (l) { l.classList.remove('active'); });
+        link.classList.add('active');
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>
